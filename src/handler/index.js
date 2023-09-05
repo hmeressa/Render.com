@@ -1,0 +1,1 @@
+module.exports.ErrorApi = require('./error.handler')

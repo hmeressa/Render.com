@@ -1,0 +1,23 @@
+{
+  "name": "nodejs-render",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src\\index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "http-status": "^1.7.0",
+    "joi": "^17.10.1",
+    "logger": "^0.0.1",
+    "nodemon": "^3.0.1",
+    "pg": "^8.11.3",
+    "typeorm": "^0.3.17"
+  }
+}
