@@ -1,5 +1,7 @@
 const express = require('express');
 const { userController } = require('../controller');
+const { createUser } = require('../validation');
+const { validationMiddleware } = require('../middleware')
 
 const router = express.Router();
 router.route("/")

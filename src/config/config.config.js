@@ -23,7 +23,7 @@ const envVarsSchema = Joi.object()
 const { value: envVars, error } = envVarsSchema.prefs({ errors: { label: 'key' } }).validate(process.env);
 
 if (error) {
-    throw new Error(`Config validation error: ${error.message}`);
+    // throw new Error(`Config validation error: ${error.message}`);
 }
 
 module.exports = {
@@ -35,6 +35,7 @@ module.exports = {
         host: process.env.PG_HOST,
         port: process.env.PG_PORT,
         database: process.env.PG_DATABASE,
+        database_URL: process.env.DB_URL,
         idleTimeOut: process.env.PG_IDLE_TIMEOUT,
         connTimeOut: process.env.PG_CONN_TIMEOUT,
         maxConn: process.env.PG_MAX_CONN,

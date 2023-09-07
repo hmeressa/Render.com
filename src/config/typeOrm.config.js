@@ -1,28 +1,31 @@
-// const configs = require('./config.config');
+const { User } = require('../model');
+const configs = require('./config.config');
 
-const { User } = require("../model");
+// configuration file for TypeORM db connection
 
 module.exports = {
     type: 'postgres',
-    host: 'localhost',
-    port: 5432,
-    username: 'postgres',
-    password: '12345678',
-    database: "TEST",
-    entities: [User],
-    // entities: [Post,Project,Task,SubTask,Milestone,minuteOfMeeting,agenda,agendaTopic,momAction,momAttendees, Risk, Issue, AfterActionAnalysis, RelatedIssue, Action, AfterActionAnalysisIssueRelated],
-    // entities: [Post,Project,Task,SubTask,Milestone,minuteOfMeeting,agenda,agendaTopic,momAction,momAttendees],
+    database_url: configs.postgres.host,
+    host: configs.postgres.database_URL,
+    port: configs.postgres.port,
+    username: configs.postgres.userName,
+    password: configs.postgres.pswd,
+    database: configs.postgres.database,
+    database_URL: configs.postgres.database_URL,
 
-    synchronize: true,
+    // url: "postgres://hmeressa:pkbE7iyk2iciQc41nERKWjDPQJqVRajd@dpg-cjsqoue8b8as73fh9i10-a.oregon-postgres.render.com/renderdb_popu",
+
+    entities: [User],
+
+    synchronize: configs.env == "development" ? true : false,
     migrations: [__dirname + "./migrations/*.js"], // Path to migration files
     cli: {
         entitiesDir: __dirname + '/../models/*.js',
         migrationsDir: __dirname + './migrations',
     },
     extra: {
-        // connectionLimit: configs.postgres.maxConn, // Set the pool size to 20 connections (adjust as needed)
-        // idleTimeoutMillis: configs.postgres.idleTimeOut,
-        // connectionTimeoutMillis: configs.postgres.connTimeOut,
+        connectionLimit: configs.postgres.maxConn, // Set the pool size to 20 connections (adjust as needed)
+        idleTimeoutMillis: configs.postgres.idleTimeOut,
+        connectionTimeoutMillis: configs.postgres.connTimeOut,
     },
-};
-
+}; 

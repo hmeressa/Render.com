@@ -1,13 +1,13 @@
 const { userService } = require('../service')
 
-const createUser = async (req, res, next) => {
-    try {
-        console.log("list of users", req.body)
-        const result = await userService.createUser(req.body);
-        res.send(result);
-    } catch (e) {
-        throw e;
-    }
+const createUser = async (req, res) => {
+    // try {
+    console.log("list of users", req.body)
+    const result = await userService.createUser(req.body);
+    res.send(result);
+    // } catch (e) {
+    //     throw e;
+    // }
 }
 const getUsers = async (req, res, next) => {
     const result = await userService.getUsers();
