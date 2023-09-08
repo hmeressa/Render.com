@@ -20,8 +20,8 @@ const updateUser = async (id, userData) => {
     return result;
 }
 
-const deleteUser = async () => {
-
+const deleteUser = async (id) => {
+    return await userRepository.delete(id);
 }
 
 

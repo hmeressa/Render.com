@@ -1,4 +1,5 @@
 const { userService } = require('../service')
+const ErrorApi = require('../handler')
 
 const createUser = async (req, res, next) => {
     console.log("list of users", req.body)
@@ -12,6 +13,9 @@ const getUsers = async (req, res, next) => {
 
 const getUser = async (req, res, next) => {
     const result = await userService.getUser(req.params.id)
+    if (!result) {
+        throw new ErrorApi("User Not Found", 404)
+    }
     res.send(result);
 }
 
@@ -20,8 +24,8 @@ const updateUser = async (req, res, next) => {
     res.send(result)
 }
 
-const deleteUser = async () => {
-    const result = await userService.deleteUser();
+const deleteUser = async (req, res, next) => {
+    const result = await userService.deleteUser(req.params.id);
     res.send(result)
 }
 module.exports =
