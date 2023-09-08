@@ -4,14 +4,18 @@ const { getRole } = require('./role.service')
 
 const rolePermissionRepository = appDataSource.getRepository(RolePermission)
 
-const assignRoleToPermission = async (roleId, rolePermissionData = []) => {
-    rolePermissionData.map(async (permission) => {
-        const result = rolePermissionRepository.create({
+const assignRoleToPermission = async (roleId, permissions = []) => {
+
+    const result = permissions.map((permission) => {
+        const assignedPermissions = rolePermissionRepository.create({
             roleId: roleId,
             permissionId: permission.id
-        })
-        await rolePermissionRepository.save(result);
-    })
+        });
+        return assignedPermissions;
+    });
+
+    await rolePermissionRepository.save(result);
+
     return await getRole(roleId);
 }
 const getRolesPermissions = async () => {
