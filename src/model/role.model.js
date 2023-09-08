@@ -12,7 +12,7 @@ module.exports = new EntitySchema({
     columns: new Role(),
     relations: {
         user: {
-            type: "One-to-Many",
+            type: "one-to-many",
             target: "User",
             inverseSide: "role"
         }
