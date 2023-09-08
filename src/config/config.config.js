@@ -51,7 +51,7 @@ module.exports = {
         database: process.env.PG_DATABASE,
         idleTimeOut: process.env.PG_IDLE_TIMEOUT,
         connTimeOut: process.env.PG_CONN_TIMEOUT,
-        maxConn: process.env.PG_MAX_CONN,
+        maxConn: process.env.PG_MAX_CONN_POOL,
     },
     jwt: {
         secret: envVars.JWT_SECRET,
