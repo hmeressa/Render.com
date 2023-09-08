@@ -2,17 +2,17 @@ const configs = require('./config.config');
 // const pg = require('pg')({
 
 // })
-const { User } = require("../model");
+const { User, Role } = require("../model");
 
 module.exports = {
     type: 'postgres',
     host: configs.postgres.host,
-    ssl: { rejectUnauthorized: false },
+    // ssl: { rejectUnauthorized: false },
     port: configs.postgres.port,
     username: configs.postgres.userName,
     password: configs.postgres.pswd,
     database: configs.postgres.database,
-    entities: [User],
+    entities: [User, Role],
     // entities: [Post,Project,Task,SubTask,Milestone,minuteOfMeeting,agenda,agendaTopic,momAction,momAttendees, Risk, Issue, AfterActionAnalysis, RelatedIssue, Action, AfterActionAnalysisIssueRelated],
     // entities: [Post,Project,Task,SubTask,Milestone,minuteOfMeeting,agenda,agendaTopic,momAction,momAttendees],
 

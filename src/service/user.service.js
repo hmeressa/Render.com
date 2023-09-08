@@ -6,7 +6,7 @@ const createUser = async (userData) => {
     return await userRepository.save(create);
 }
 const getUsers = async () => {
-    const result = await userRepository.find();
+    const result = await userRepository.find({ relations: ['role'] });
     return result;
 }
 
