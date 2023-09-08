@@ -15,6 +15,19 @@ module.exports = new EntitySchema({
             type: "one-to-many",
             target: "User",
             inverseSide: "role"
+        },
+        relations: {
+            permission: {
+                type: 'many-to-many',
+                target: 'Permission',
+                joinTable: {
+                    name: 'rolePermission',
+                    joinColumn: { name: 'roleId', referencedColumnName: 'id' },
+                    inverseJoinColumn: { name: 'permissionId', referencedColumnName: 'id' },
+                },
+                onDelete: 'SET NULL',
+                onUpdate: 'CASCADE',
+            },
         }
     }
 })
