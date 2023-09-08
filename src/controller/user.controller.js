@@ -1,13 +1,9 @@
 const { userService } = require('../service')
 
-const createUser = async (req, res) => {
-    // try {
+const createUser = async (req, res, next) => {
     console.log("list of users", req.body)
     const result = await userService.createUser(req.body);
     res.send(result);
-    // } catch (e) {
-    //     throw e;
-    // }
 }
 const getUsers = async (req, res, next) => {
     const result = await userService.getUsers();
@@ -19,12 +15,14 @@ const getUser = async (req, res, next) => {
     res.send(result);
 }
 
-const updateUser = async (id, userData) => {
-    const result = await userService.updateUser(id, userData);
+const updateUser = async (req, res, next) => {
+    const result = await userService.updateUser(req.params.id, req.body);
+    res.send(result)
 }
 
 const deleteUser = async () => {
-    return await userService.deleteUser();
+    const result = await userService.deleteUser();
+    res.send(result)
 }
 module.exports =
 {
