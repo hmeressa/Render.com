@@ -6,7 +6,7 @@ class User extends BaseModel {
         this.firstName = { type: "varchar", nullable: true };
         this.lastName = { type: "varchar", nullable: true };
         this.email = { type: "varchar", nullable: true };
-        this.password = { type: "varchar", nullable: true };
+        // this.password = { type: "varchar", nullable: true };
         this.roleId = { type: "varchar", nullable: true }
     }
 }
