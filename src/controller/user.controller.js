@@ -26,6 +26,9 @@ const updateUser = async (req, res, next) => {
 
 const deleteUser = async (req, res, next) => {
     const result = await userService.deleteUser(req.params.id);
+    if (result.affected != 1) {
+        throw new ErrorApi("User not Deleted", 404)
+    }
     res.send(result)
 }
 module.exports =
