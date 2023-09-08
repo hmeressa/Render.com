@@ -1,23 +1,22 @@
-const { User } = require('../model');
 const configs = require('./config.config');
+// const pg = require('pg')({
 
-// configuration file for TypeORM db connection
+// })
+const { User } = require("../model");
 
 module.exports = {
     type: 'postgres',
-    database_url: configs.postgres.host,
-    host: configs.postgres.database_URL,
+    host: configs.postgres.host,
+    ssl: { rejectUnauthorized: true },
     port: configs.postgres.port,
     username: configs.postgres.userName,
     password: configs.postgres.pswd,
     database: configs.postgres.database,
-    database_URL: configs.postgres.database_URL,
-
-    // url: "postgres://hmeressa:pkbE7iyk2iciQc41nERKWjDPQJqVRajd@dpg-cjsqoue8b8as73fh9i10-a.oregon-postgres.render.com/renderdb_popu",
-
     entities: [User],
+    // entities: [Post,Project,Task,SubTask,Milestone,minuteOfMeeting,agenda,agendaTopic,momAction,momAttendees, Risk, Issue, AfterActionAnalysis, RelatedIssue, Action, AfterActionAnalysisIssueRelated],
+    // entities: [Post,Project,Task,SubTask,Milestone,minuteOfMeeting,agenda,agendaTopic,momAction,momAttendees],
 
-    synchronize: configs.env == "development" ? true : false,
+    synchronize: true,
     migrations: [__dirname + "./migrations/*.js"], // Path to migration files
     cli: {
         entitiesDir: __dirname + '/../models/*.js',
@@ -28,4 +27,5 @@ module.exports = {
         idleTimeoutMillis: configs.postgres.idleTimeOut,
         connectionTimeoutMillis: configs.postgres.connTimeOut,
     },
-}; 
+};
+

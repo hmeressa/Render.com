@@ -1,0 +1,13 @@
+{
+    "AppInfo":{
+        "name":"Render Application",
+        "version":"1.0",
+        "Technology":{
+            "NodeJs":"For Backend Implementation",
+            "PostgreSQL":"For data storage",
+            "Nginx" : "For Serving web content",
+            "Docker":"For dockerizing the APP",
+            "RabbitMQ" : "For message Broker"
+        }
+    }
+}
