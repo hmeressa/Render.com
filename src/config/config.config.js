@@ -13,7 +13,7 @@ const envVarsSchema = Joi.object()
         PG_HOST: Joi.string().required().description('Postgress Host name is required!'),
         PG_PORT: Joi.number().required().description('Postgress Port is required!'),
         PG_DATABASE: Joi.string().required().description('Postgress Database name is required!'),
-        PG_MAX_CONN_POOL: Joi.number().required().description('Postgress Maximum connection pool number is required!'),
+        // PG_MAX_CONN_POOL: Joi.number().required().description('Postgress Maximum connection pool number is required!'),
         PG_IDLE_TIMEOUT: Joi.number().required().description('Postgress Idle timeout is required!'),
         PG_CONN_TIMEOUT: Joi.number().required().description('Postgress Connection timeout is required!'),
 
@@ -51,7 +51,7 @@ module.exports = {
         database: process.env.PG_DATABASE,
         idleTimeOut: process.env.PG_IDLE_TIMEOUT,
         connTimeOut: process.env.PG_CONN_TIMEOUT,
-        maxConn: process.env.PG_MAX_CONN_POOL,
+        // maxConn: process.env.PG_MAX_CONN_POOL,
     },
     jwt: {
         secret: envVars.JWT_SECRET,
