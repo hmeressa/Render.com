@@ -16,12 +16,10 @@ module.exports.RolePermission = new EntitySchema({
         role: {
             type: 'many-to-one',
             target: 'Role',
-            joinColumn: { name: 'roleId', referencedColumnName: 'id' },
         },
         permission: {
             type: 'many-to-one',
             target: 'Permission',
-            joinColumn: { name: 'permissionId', referencedColumnName: 'id' },
         },
         onDelete: "SET NULL",
         onUpdate: 'CASCADE'
