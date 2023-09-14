@@ -1,5 +1,5 @@
 const { permissionService } = require('../service')
-const ErrorApi = require('../handler')
+const { ErrorApi } = require("../handler/error.handler");
 
 const createPermission = async (req, res, next) => {
     const result = await permissionService.createPermission(req.body);

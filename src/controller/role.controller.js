@@ -1,5 +1,5 @@
 const { roleService } = require('../service')
-const ErrorApi = require('../handler')
+const { ErrorApi } = require("../handler/error.handler");
 
 const createRole = async (req, res, next) => {
     const result = await roleService.createRole(req.body);

@@ -1,11 +1,11 @@
 const { userService } = require('../service')
-const ErrorApi = require('../handler')
+const { ErrorApi } = require("../handler/error.handler");
 
 const createUser = async (req, res, next) => {
-    console.log("list of users", req.body)
     const result = await userService.createUser(req.body);
     res.send(result);
 }
+
 const getUsers = async (req, res, next) => {
     const result = await userService.getUsers();
     res.send(result);
@@ -31,6 +31,7 @@ const deleteUser = async (req, res, next) => {
     }
     res.send(result)
 }
+
 module.exports =
 {
     createUser,

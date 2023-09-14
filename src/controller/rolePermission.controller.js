@@ -1,5 +1,5 @@
 const { rolePermissionService } = require('../service')
-const ErrorApi = require('../handler')
+const { ErrorApi } = require("../handler/error.handler");
 
 const assignRoleToPermission = async (req, res, next) => {
     const permissions = req.body.permissions;

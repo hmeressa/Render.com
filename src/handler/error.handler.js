@@ -1,9 +1,8 @@
 class ErrorApi extends Error {
-    constructor(message, code, status) {
-        super();
-        this.message = message,
-            this.code = code,
-            this.status = status
+    constructor(message, statusCode) {
+        super(message);
+        this.message = message;
+        this.statusCode = statusCode;
     }
 }
 

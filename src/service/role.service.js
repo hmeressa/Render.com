@@ -6,7 +6,7 @@ const createRole = async (roleData) => {
     return await roleRepository.save(result);
 }
 const getRoles = async () => {
-    return await roleRepository.find();
+    return await roleRepository.find({ tableName: "roles", relations: ['permissions'] });
 }
 
 const getRole = async (id) => {

@@ -1,26 +1,23 @@
-const { RolePermission } = require('../model')
+const { RolePermission, Role } = require('../model')
 const appDataSource = require('../config/dbConnection.config')
-const { getRole } = require('./role.service')
 
-const rolePermissionRepository = appDataSource.getRepository(RolePermission)
+const rolePermissionRepository = appDataSource.getRepository(RolePermission);
 
 const assignRoleToPermission = async (roleId, permissions = []) => {
 
-    const result = permissions.map((permission) => {
+    const result = permissions.map((permissionId) => {
         const assignedPermissions = rolePermissionRepository.create({
             roleId: roleId,
-            permissionId: permission.id
+            permissionId: permissionId
         });
         return assignedPermissions;
     });
 
-    await rolePermissionRepository.save(result);
-
-    return await getRole(roleId);
+    return await rolePermissionRepository.save(result);
 }
 const getRolesPermissions = async () => {
     return await rolePermissionRepository.find({
-        tableName: "rolePermission",
+        tableName: "rolePermissions",
         relations: ['permission']
     });
 }

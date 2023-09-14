@@ -3,6 +3,7 @@ const userRoute = require('./user.route');
 const roleRoute = require('./role.route');
 const permissionRoute = require('./permission.route');
 const rolePermissionRoute = require('./rolePermission.route');
+const authRoute = require('./auth.route')
 
 const router = express.Router();
 
@@ -23,6 +24,10 @@ const routeList =
         {
             path: "/rolePermission",
             route: rolePermissionRoute
+        },
+        {
+            path: "/auth",
+            route: authRoute
         }
     ];
 
