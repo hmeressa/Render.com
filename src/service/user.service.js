@@ -1,14 +1,16 @@
 const { User } = require('../model')
 const appDataSource = require('../config/dbConnection.config');
 const { hashPassword } = require('../utils/hash.util');
-
+const { publishToRabbit } = require('../rabbitMQ/producer.rabbitMQ')
 const userRepository = appDataSource.getRepository(User)
 
 const createUser = async (userData) => {
 
     userData.password = hashPassword(userData.password, 10);
     const create = userRepository.create(userData);
+    await publishToRabbit("create", create);
     return await userRepository.save(create);
+
 }
 const getUsers = async () => {
     const result = await userRepository.find({ tableName: 'users', relations: ['role.permission'] });
