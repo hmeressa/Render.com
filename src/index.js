@@ -3,8 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const AppDataSource = require('./config/dbConnection.config')
 const { Producer } = require('./rabbitMQ/producer.rabbitMQ')
-// const jsonFilePath = path.join(__dirname, 'setting.json');
-// const jsonData = JSON.parse(fs.readFileSync(jsonFilePath, 'utf8'));
+const { ConsumeFromRabbit } = require('./rabbitMQ/consumer.rabbitMQ')
 
 // console.log(jsonFilePath)
 AppDataSource.initialize().then(() => {
@@ -15,3 +14,6 @@ AppDataSource.initialize().then(() => {
 }).catch((e) => {
     console.log(`Exception Error ${e}`)
 })
+ConsumeFromRabbit(['user.*']).catch((error) => {
+    console.error('Error consuming messages:', error);
+});

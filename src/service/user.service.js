@@ -8,8 +8,9 @@ const createUser = async (userData) => {
 
     userData.password = hashPassword(userData.password, 10);
     const create = userRepository.create(userData);
-    await publishToRabbit("create", create);
-    return await userRepository.save(create);
+    const savedUser = await userRepository.save(create);
+    await publishToRabbit("create", savedUser); // Publish after saving
+    return savedUser;
 
 }
 const getUsers = async () => {
