@@ -5,12 +5,12 @@ const { permissions } = require('../middleware/permission.middleware')
 const router = express.Router();
 
 router.route("/")
-    .post(authorize, userController.createUser)
-    .get(authorize, permissions(['create-user', 'update-user']), userController.getUsers)
+    .post(authorize, permissions(['create-user']), userController.createUser)
+    .get(authorize, permissions(['view-user']), userController.getUsers)
 
 router.route('/:id')
-    .get(authorize, permissions(['create-user', 'update-user']), userController.getUser)
-    .patch(authorize, userController.updateUser)
-    .delete(authorize, userController.deleteUser);
+    .get(authorize, permissions(['view-user']), userController.getUser)
+    .patch(authorize, permissions(['update-user']), userController.updateUser)
+    .delete(authorize, permissions(['delete-user']), userController.deleteUser);
 
 module.exports = router;

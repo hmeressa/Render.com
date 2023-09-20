@@ -5,23 +5,23 @@ const permissions = (requiredPermission = []) => {
         try {
             const user = req.user;
             if (!user) {
-                return next(new ErrorApi("User is Not Authorized Please Login first", 401));
+                return next(new ErrorApi("User is Not Authorized. Please Login first", 401));
             }
             if (user?.role?.permission) {
-                const hasRequiredPermission = requiredPermission.every(requiredPermission =>
-                    user.role.permission.some(permission => permission.name === requiredPermission)
+                const hasRequiredPermission = user.role.permission.some(perm =>
+                    requiredPermission.includes(perm.name)
                 );
-                console.log(hasRequiredPermission)
+
                 if (!hasRequiredPermission) {
-                    return next(new ErrorApi("You don't have  the required permission", 401));
+                    return next(new ErrorApi("You don't have the required permission", 401));
                 }
                 next();
             }
-
-
         } catch (error) {
-            console.log(error);
+            console.error(error);
+            next(error);
         }
     };
 };
+
 module.exports = { permissions };
