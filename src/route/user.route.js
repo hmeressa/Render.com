@@ -5,8 +5,8 @@ const { permissions } = require('../middleware/permission.middleware')
 const router = express.Router();
 
 router.route("/")
-    .post(userController.createUser)
-    .get(userController.getUsers)
+    .post(authorize, permissions(['create-user']), userController.createUser)
+    .get(authorize, permissions(['view-user']), userController.getUsers)
 
 router.route('/:id')
     .get(authorize, permissions(['view-user']), userController.getUser)
