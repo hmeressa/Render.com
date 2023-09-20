@@ -6,7 +6,7 @@ const { permissions } = require('../middleware/permission.middleware')
 const router = express.Router();
 router.route("/")
     .post(permissionController.createPermission)
-    .get(authorize, permissions(['view-permission']), permissionController.getPermissions)
+    .get(permissionController.getPermissions)
 router.route('/:id')
     .get(permissionController.getPermission)
     .patch(permissionController.updatePermission)
