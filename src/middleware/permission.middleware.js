@@ -1,7 +1,7 @@
 const { ErrorApi } = require("../handler/error.handler");
 
 const permissions = (requiredPermissions = []) => {
-    return (req, res, next) => {
+    return async (req, res, next) => {
         try {
             const user = req.user;
             if (!user) {
@@ -10,9 +10,7 @@ const permissions = (requiredPermissions = []) => {
 
             if (user?.role?.permission) {
                 const hasRequiredPermission = requiredPermissions.every(requiredPermission =>
-                    user.role.permission
-                        .map(permission => permission.name)
-                        .includes(requiredPermission)
+                    user.role.permission.map(permission => permission.name).includes(requiredPermission)
                 );
 
                 if (!hasRequiredPermission) {
