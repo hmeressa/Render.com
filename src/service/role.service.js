@@ -1,8 +1,15 @@
 const { Role } = require('../model')
 const appDataSource = require('../config/dbConnection.config')
 const roleRepository = appDataSource.getRepository(Role)
+
 const createRole = async (roleData) => {
-    const result = roleRepository.create(roleData);
+    console.log(roleData, "serce")
+    const result = await roleRepository.create({
+
+
+        name: roleData.name,
+        producerId: roleData.id
+    });
     return await roleRepository.save(result);
 }
 const getRoles = async () => {

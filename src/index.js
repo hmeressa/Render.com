@@ -9,14 +9,14 @@ const rabbitConsumer = require("./rabbitMQ/consumer")
 
 // console.log(jsonFilePath)
 rabbitConsumer(['user.*']).catch((error) => {
-    console.error('Error consuming messages:', error);
-  });
-  
+  console.error('Error consuming messages:', error);
+});
+
 AppDataSource.initialize().then(() => {
-    console.log('Connected to Postgres through Typeorm');
-    server = app.listen(3000, () => {
-        console.log(`Listening to port http://localhost:3000`);
-    });
+  console.log('Connected to Postgres through Typeorm');
+  server = app.listen(3000, () => {
+    console.log(`Listening to port http://localhost:3000`);
+  });
 }).catch((e) => {
-    console.log(`Exception Error ${e}`)
+  console.log(`Exception Error ${e}`)
 })

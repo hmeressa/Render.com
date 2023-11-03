@@ -7,7 +7,9 @@ class User extends BaseModel {
         this.lastName = { type: "varchar", nullable: true };
         this.email = { type: "varchar", nullable: true };
         this.password = { type: "varchar", nullable: true };
-        this.roleId = { type: "varchar", nullable: true }
+        this.roleId = { type: "varchar", nullable: true };
+        this.produceruserId = { type: "uuid", nullable: true }
+
     }
 }
 module.exports = new EntitySchema({
@@ -19,6 +21,7 @@ module.exports = new EntitySchema({
             type: "many-to-one",
             target: "Role",
             inverseSide: "user"
+
         }
     }
 })
