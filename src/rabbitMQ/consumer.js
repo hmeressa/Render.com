@@ -28,7 +28,7 @@ async function ConsumeFromRabbit(routingKeys = []) {
 
 
 
-    //  
+
     if (data.fields.routingKey.includes('role') && data.fields.routingKey.includes('create')) {
 
       console.log(JSON.parse(data.content.toString()), data.fields.routingKey)
