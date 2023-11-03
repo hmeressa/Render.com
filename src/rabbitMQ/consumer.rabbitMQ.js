@@ -1,10 +1,12 @@
 const amqp = require("amqplib");
-const { userService } = require('../service')
-const ConsumeFromRabbit = async (routingKeys = []) => {
 
-    const rabbitmqUrl = "amqp://localhost:5672";
+const userService = require('../service/user.service');
+
+const { roleService } = require("../service");
+const ConsumeFromRabbit = async (routingKeys = []) => {
+    const rabbitmqUrl = "amqp://selam:selam@172.16.32.110:5672";
     const connection = await amqp.connect(rabbitmqUrl);
-    const exchange = "dataExchange";
+    const exchange = "userExchange";
     const options = {};
 
     let channel = await connection.createChannel();
@@ -16,17 +18,21 @@ const ConsumeFromRabbit = async (routingKeys = []) => {
     const { queue } = await channel.assertQueue("", options);
     routingKeys.forEach((routingK) => {
         channel.bindQueue(queue, exchange, routingK);
+        console.log(queue);
     })
 
-    channel.consume(queue, (data) => {
-        console.log(data)
-        // if (data.fields.routingKey.includes('user') && data.fields.routingKey.includes('create')) {
-        //     userService.createUser(JSON.parse(data.content.toString()))
-        // }
-        // else if (data.fields.routingKey.includes('user') && data.fields.routingKey.includes('update')) {
-        //     userService.updateUser(JSON.parse(data.content.toString()))
-        // }
-        channel.ack(data, false, true);
+    channel.consume(queue, async (data) => {
+        console.log(JSON.parse(data.content.toString(), "recived data"))
+
+        if (data.fields.routingKey.includes('role') && data.fields.routingKey.includes('create')) {
+
+            console.log(JSON.parse(data.content.toString()), data.fields.routingKey)
+            await roleService.createRole(JSON.parse(data.content.toString()))
+        }
+        else if (data.fields.routingKey.includes('user') && data.fields.routingKey.includes('create')) {
+            console.log(JSON.parse(data.content.toString()))
+            await userService.createUser(JSON.parse(data.content.toString()))
+        }
     })
 }
 

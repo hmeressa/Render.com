@@ -12,10 +12,4 @@ const publishToRabbit = async (data, routingKey) => {
     console.log('User data :', data)
 }
 
-
-
-
-
-
-
 module.exports = { publishToRabbit };
