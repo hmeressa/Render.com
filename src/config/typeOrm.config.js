@@ -2,17 +2,17 @@ const configs = require('./config.config');
 // const pg = require('pg')({
 
 // })
-const { User, Role, Permission, RolePermission } = require("../model");
+const { User, Role, Permission, RolePermission, Token } = require("../model");
 
 module.exports = {
     type: 'postgres',
     host: configs.postgres.host,
-    ssl: { rejectUnauthorized: false },
+    // ssl: { rejectUnauthorized: false },
     port: configs.postgres.port,
     username: configs.postgres.userName,
     password: configs.postgres.pswd,
     database: configs.postgres.database,
-    entities: [User, Role, Permission, RolePermission],
+    entities: [User, Role, Permission, RolePermission, Token],
     synchronize: true,
     migrations: [__dirname + "./migrations/*.js"], // Path to migration files
     cli: {

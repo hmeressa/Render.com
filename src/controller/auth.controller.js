@@ -1,5 +1,5 @@
 const { ErrorApi } = require("../handler/error.handler");
-const { userService } = require("../service");
+const { authService, userService } = require("../service");
 const { createToken } = require('../middleware/createToken.middleware')
 const { comparePassword } = require("../utils/comaparePassword.util");
 
@@ -17,6 +17,7 @@ const auth = async (req, res, next) => {
     }
 
     const token = await createToken({ id: result.id })
+    await authService.storeToken({ token, userId: result.id })
     res.send(token)
 }
 

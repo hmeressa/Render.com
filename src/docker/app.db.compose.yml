@@ -1,0 +1,22 @@
+version: '3'
+services:
+  app:
+    image: app
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - NODE_ENV=production
+    # Add any other environment variables here
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345678
+      POSTGRES_DB: Test
+    ports:
+      - "5432:5432"

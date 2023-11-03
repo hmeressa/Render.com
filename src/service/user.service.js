@@ -9,7 +9,7 @@ const createUser = async (userData) => {
     userData.password = hashPassword(userData.password, 10);
     const create = userRepository.create(userData);
     const savedUser = await userRepository.save(create);
-    await publishToRabbit("create", savedUser); // Publish after saving
+    await publishToRabbit(savedUser, 'user.create1');
     return savedUser;
 
 }
@@ -29,6 +29,7 @@ const getUserByEmail = async (email) => {
 }
 const updateUser = async (id, userData) => {
     const result = await userRepository.update(id, userData);
+    await publishToRabbit(savedUser, 'user.create');
     return result;
 }
 

@@ -14,6 +14,6 @@ AppDataSource.initialize().then(() => {
 }).catch((e) => {
     console.log(`Exception Error ${e}`)
 })
-ConsumeFromRabbit(['user.*']).catch((error) => {
-    console.error('Error consuming messages:', error);
-});
+// ConsumeFromRabbit(['user.*']).catch((error) => {
+// console.error('Error consuming messages:', error);
+// });

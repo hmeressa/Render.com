@@ -1,9 +1,11 @@
 const { userService } = require('../service')
 const { ErrorApi } = require("../handler/error.handler");
 const httpStatus = require('http-status');
+const { RedisInstance } = require('../config/redis.config');
 
 const createUser = async (req, res, next) => {
     const result = await userService.createUser(req.body);
+    // const redisStorage = RedisInstance.set("RedisStorage", result);
     res.status(200).json({
         status: result,
         statusCode: 200,
@@ -12,6 +14,25 @@ const createUser = async (req, res, next) => {
 
 const getUsers = async (req, res, next) => {
     const result = await userService.getUsers();
+
+    RedisInstance.get('RedisStorage')
+        .then((result) => {
+            if (result) {
+                const parsedData = JSON.parse(result);
+                console.log('Data from Redis:', parsedData);
+                res.status(200).json(parsedData);
+            } else {
+                console.log('No data found in Redis.');
+                res.status(404).send('No data found in Redis.');
+            }
+        })
+        .catch((error) => {
+            console.error('Error fetching data from Redis:', error);
+            res.status(500).send('Error fetching data from Redis.');
+        });
+
+    // Export the Express app for use in your main application file
+    module.exports = app;
     res.status(200).json({
         statusCode: 200,
         status: "Success",
