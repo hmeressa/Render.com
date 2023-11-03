@@ -1,35 +1,57 @@
 const { userService } = require('../service')
 const { ErrorApi } = require("../handler/error.handler");
+const httpStatus = require('http-status');
 
 const createUser = async (req, res, next) => {
     const result = await userService.createUser(req.body);
-    res.send(result);
+    res.status(200).json({
+        status: result,
+        statusCode: 200,
+    });
 }
 
 const getUsers = async (req, res, next) => {
     const result = await userService.getUsers();
-    res.send(result);
+    res.status(200).json({
+        statusCode: 200,
+        status: "Success",
+        User: result
+    });
 }
 
 const getUser = async (req, res, next) => {
     const result = await userService.getUser(req.params.id)
     if (!result) {
-        throw new ErrorApi("User Not Found", 404)
+        return next(new ErrorApi("User not Found", 404))
     }
-    res.send(result);
+    res.status(200).json({
+        statusCode: 200,
+        status: "Success",
+        User: result
+    });
 }
 
 const updateUser = async (req, res, next) => {
     const result = await userService.updateUser(req.params.id, req.body);
-    res.send(result)
+    res.status(200).json({
+        statusCode: 200,
+        status: "Success",
+        User: result
+    });
 }
 
 const deleteUser = async (req, res, next) => {
-    const result = await userService.deleteUser(req.params.id);
-    if (result.affected != 1) {
-        throw new ErrorApi("User not Deleted", 404)
+    const result = await userService.getUser(req.params.id);
+    if (!result) {
+        return next(new ErrorApi("User not Found", 404))
     }
-    res.send(result)
+    await userService.deleteUser(req.params.id);
+
+    res.status(200).json({
+        statusCode: 200,
+        status: "Success",
+        User: result
+    });
 }
 
 module.exports =

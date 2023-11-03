@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-
 const routes = require('./route');
 const { ErrorApi } = require('./handler/error.handler');
 const httpStatus = require('http-status');
