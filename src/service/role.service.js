@@ -1,13 +1,10 @@
 const { Role } = require('../model')
 const appDataSource = require('../config/dbConnection.config');
-const { publishToRabbit } = require('../rabbitMQ/producer.rabbitMQ');
 const roleRepository = appDataSource.getRepository(Role)
 
 const createRole = async (roleData) => {
     console.log(roleData, "serce")
     const result = await roleRepository.create({
-
-
         name: roleData.name,
         producerId: roleData.id
     });
