@@ -14,10 +14,7 @@ const createUser = async (req, res, next) => {
 
 const getUsers = async (req, res, next) => {
     const result = await userService.getUsers();
-    res.status(200).json({
-        status: "Success",
-        User: result
-    });
+    res.send(result);
 }
 
 const getUser = async (req, res, next) => {
@@ -25,11 +22,7 @@ const getUser = async (req, res, next) => {
     if (!result) {
         return next(new ErrorApi("User not Found", 404))
     }
-    res.status(200).json({
-        statusCode: 200,
-        status: "Success",
-        User: result
-    });
+    res.send(result);
 }
 
 const updateUser = async (req, res, next) => {
