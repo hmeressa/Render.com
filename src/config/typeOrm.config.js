@@ -7,7 +7,7 @@ const { User, Role, Permission, RolePermission, Token } = require("../model");
 module.exports = {
     type: 'postgres',
     host: configs.postgres.host,
-    // ssl: { rejectUnauthorized: false },
+    ssl: { rejectUnauthorized: false },
     port: configs.postgres.port,
     username: configs.postgres.userName,
     password: configs.postgres.pswd,
