@@ -4,7 +4,7 @@ const userService = require('../service/user.service');
 
 const { roleService } = require("../service");
 const ConsumeFromRabbit = async (routingKeys = []) => {
-    const rabbitmqUrl = "amqp://selam:selam@172.16.32.110:5672";
+    const rabbitmqUrl = "amqp://localhost:5672";
     const connection = await amqp.connect(rabbitmqUrl);
     const exchange = "userExchange";
     const options = {};
